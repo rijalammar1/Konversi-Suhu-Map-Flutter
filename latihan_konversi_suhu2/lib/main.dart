@@ -28,29 +28,29 @@ class _MyAppState extends State<MyApp> {
   void onDropChange(Object? value) {
     return setState(() {
       selctDropdown = value.toString();
-      //  if (text1.text.isNotEmpty) {
-      //   switch (selctDropdown) {
-      //     case "Kelvin":
-      //       hasil = int.parse(text1.text) + 273;
+      if (text1.text.isNotEmpty) {
+        switch (selctDropdown) {
+          case "Kelvin":
+            hasil = int.parse(text1.text) + 273;
 
-      //       break;
+            break;
 
-      //     case "Reamur":
-      //       hasil = int.parse(text1.text) * 4 / 5;
-      //       break;
+          case "Reamur":
+            hasil = int.parse(text1.text) * 4 / 5;
+            break;
 
-      //     case "Fahrenheit":
-      //       hasil = int.parse(text1.text) * 9 / 5 + 32;
-      //       break;
-      //     default:
-      //   }
-      //   Riwayat.add("konversi Dari " +
-      //       text1.text +
-      //       " Celcius Ke " +
-      //       selctDropdown +
-      //       " Dengan Hasil " +
-      //       hasil.toString());
-      // }
+          case "Fahrenheit":
+            hasil = int.parse(text1.text) * 9 / 5 + 32;
+            break;
+          default:
+        }
+        Riwayat.add("konversi Dari " +
+            text1.text +
+            " Celcius Ke " +
+            selctDropdown +
+            " Dengan Hasil " +
+            hasil.toString());
+      }
     });
   }
 
@@ -82,6 +82,8 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  double _currentVal = 0;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -93,7 +95,17 @@ class _MyAppState extends State<MyApp> {
           padding: EdgeInsets.only(left: 10, top: 10),
           child: Column(
             children: [
-              InputSuhu(text1: text1),
+              Slider(
+                  value: _currentVal,
+                  max: 100,
+                  divisions: 10,
+                  label: _currentVal.round().toString(),
+                  onChanged: (double value) {
+                    setState(() {
+                      _currentVal = value;
+                      text1.text = _currentVal.toString();
+                    });
+                  }),
               DaftarSuhu(
                 selctDropdown: selctDropdown,
                 listSuhu: listSuhu,
