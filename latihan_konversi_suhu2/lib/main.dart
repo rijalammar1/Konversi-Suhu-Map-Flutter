@@ -82,7 +82,7 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  double _currentVal = 0;
+  double Val = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -96,14 +96,14 @@ class _MyAppState extends State<MyApp> {
           child: Column(
             children: [
               Slider(
-                  value: _currentVal,
+                  value: Val,
                   max: 100,
                   divisions: 10,
-                  label: _currentVal.round().toString(),
+                  label: Val.round().toString(),
                   onChanged: (double value) {
                     setState(() {
-                      _currentVal = value;
-                      text1.text = _currentVal.toString();
+                      Val = value;
+                      text1.text = Val.toString();
                     });
                   }),
               DaftarSuhu(
